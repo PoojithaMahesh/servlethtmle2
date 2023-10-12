@@ -2,6 +2,7 @@ package studentwithhtmle2.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.GenericServlet;
 import javax.servlet.ServletException;
@@ -32,16 +33,35 @@ public class SignUpServlet  extends GenericServlet {
 		
 		
 		StudentDao studentDao=new StudentDao();
-		Student dbStudent=studentDao.saveStudent(student);
+		List<Student> list=studentDao.getAllStudents();
 		
-		if(dbStudent!=null) {
-//			its saved successfully
-			
-			PrintWriter printWriter=res.getWriter();
-			printWriter.print("STUDENT SIGNEDIN SUCCESSFULLY");
-			
-			
+//		first im going to fetch all the students details
+		boolean value=false;
+		
+		for(Student st:list) {
+
+			if(email.equals(st.getEmail())) {
+//				means this  is already present in the database and i cant save this student details
+				value=true;
+				break;
+			}
 		}
+		
+		
+		if(value) {
+//			email is already present in the database
+			PrintWriter printWriter=res.getWriter();
+			printWriter.print("EMail already exist and i cant save this student details");
+			
+		}else {
+//			email is not present in the database and then i can save ythis student details
+			studentDao.saveStudent(student);
+			PrintWriter printWriter=res.getWriter();
+			printWriter.print("SignedIn Successfully");
+		}
+		
+		
+		
 		
 		
 		
