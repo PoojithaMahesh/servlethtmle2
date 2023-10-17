@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.GenericServlet;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -56,8 +57,8 @@ public class SignUpServlet  extends GenericServlet {
 		}else {
 //			email is not present in the database and then i can save ythis student details
 			studentDao.saveStudent(student);
-			PrintWriter printWriter=res.getWriter();
-			printWriter.print("SignedIn Successfully");
+			RequestDispatcher dispatcher=req.getRequestDispatcher("login.html");
+			dispatcher.forward(req, res);
 		}
 		
 		

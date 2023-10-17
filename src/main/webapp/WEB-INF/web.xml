@@ -47,4 +47,14 @@
   <url-pattern>/select</url-pattern>
   </servlet-mapping>
   
+  <servlet>
+  <servlet-name>edit</servlet-name>
+  <servlet-class>studentwithhtmle2.controller.EditServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  <servlet-name>edit</servlet-name>
+  
+  <url-pattern>/edit</url-pattern>
+  </servlet-mapping>
+  
 </web-app>

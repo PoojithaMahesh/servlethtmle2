@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.GenericServlet;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -17,7 +18,7 @@ import studentwithhtmle2.dto.Student;
 
 public class LoginServlet extends HttpServlet {
  @Override
-protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 	 String email=req.getParameter("email");
 		String password=req.getParameter("password");
 		
@@ -44,16 +45,15 @@ protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws Se
 			if(password.equals(studentPasswordFromTheDatabase)) {
 //				password is crct
 //				login success
-				PrintWriter printWriter=resp.getWriter();
-				printWriter.print("Loginn Success");
+				resp.sendRedirect("https://www.javatpoint.com/how-many-tens-are-there-in-one-hundred");
 			}else {
 //				invalid password
-				PrintWriter printWriter=resp.getWriter();
-				printWriter.print("Invalid Password");
+				RequestDispatcher dispatcher=req.getRequestDispatcher("login.html");
+				dispatcher.include(req, resp);
 			}
 		}else {
-			PrintWriter printWriter=resp.getWriter();
-			printWriter.print("Invalid Email");
+			RequestDispatcher dispatcher=req.getRequestDispatcher("login.html");
+			dispatcher.include(req, resp);
 		}
 	
 		
